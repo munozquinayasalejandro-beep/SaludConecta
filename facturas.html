@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Facturación — SaludConecta</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/public/style/pacientes.css">
+  <style>
+    /* Vista imprimible de la factura */
+    #zonaImprimible { display: none; }
+    @media print {
+      body * { visibility: hidden; }
+      #zonaImprimible, #zonaImprimible * { visibility: visible; }
+      #zonaImprimible { display: block; position: absolute; top: 0; left: 0; width: 100%; padding: 20px; }
+      .no-imprimir { display: none !important; }
+    }
+    .factura-header { display: flex; justify-content: space-between; border-bottom: 2px solid #1F4E79; padding-bottom: 10px; margin-bottom: 15px; }
+    .factura-nota-legal { font-size: 0.78rem; color: #999; border-top: 1px dashed #ccc; margin-top: 15px; padding-top: 10px; }
+  </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="logo-section">
+            <form action="/login" method="POST">
+                <img src="/img/icono.png" alt="SALUDCONECTA" class="imagen-centrada" width="50" height="50">
+            </form>
+        </div>
+        <a href="/vista/medicamentos" class="nav-item">Inventario</a>
+        <a href="/vista/pacientes" class="nav-item">Pacientes y Prescripciones</a>
+        <a href="/vista/entregas" class="nav-item">Entregas</a>
+        <a href="/vista/facturas" class="nav-item active">Facturación</a>
+        <a href="#" title="Próximamente" class="nav-item">Reportes</a>
+    </nav>
+
+    <main class="content">
+        <div class="header-main">
+            <h2>Facturación</h2>
+            <i class="fas fa-home home-icon"></i>
+        </div>
+
+        <div class="grid-container">
+            <section class="card full-width">
+                <h3>Facturas generadas</h3>
+                <p style="font-size:0.85rem; color:#666;">
+                    Las facturas se generan automáticamente al dispensar una prescripción. Este módulo reúne
+                    los datos que exige una factura electrónica colombiana, pero <strong>no reemplaza el proceso
+                    de facturación electrónica DIAN</strong> (requiere proveedor tecnológico autorizado y firma digital).
+                </p>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>N.° Factura</th>
+                                <th>Fecha</th>
+                                <th>Paciente</th>
+                                <th>Medicamento</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="facturasTable"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal de visualización / impresión de factura -->
+    <div class="modal fade" id="verFacturaModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header no-imprimir">
+            <h5 class="modal-title">Factura</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="contenidoFactura"></div>
+          </div>
+          <div class="modal-footer no-imprimir">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" onclick="window.print()">Imprimir / Guardar como PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zona real que se imprime (fuera del modal, para que @media print la muestre limpia) -->
+    <div id="zonaImprimible"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/authFetch.js"></script>
+    <script src="/public/facturas.js"></script>
+</body>
+</html>

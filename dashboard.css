@@ -1,0 +1,154 @@
+/* Reseteo básico de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f4f8;
+    color: #333;
+    height: 100vh;
+}
+
+/* Contenedor principal en Flexbox */
+.dashboard-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+/* --- BARRA LATERAL (SIDEBAR) --- */
+.sidebar {
+    width: 260px;
+    background-color: #2c3e50; /* Azul oscuro del diseño */
+    color: #ffffff;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-title {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 5px;
+}
+
+.sidebar-nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+/* Efecto hover y estado activo */
+.sidebar-nav a:hover, 
+.sidebar-nav a.active {
+    background-color: #34495e;
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+.main-content {
+    flex-1: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* Rejilla de tarjetas alineadas arriba */
+.cards-grid {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* --- TARJETAS (CARDS) --- */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    width: 320px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    color: #000000;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Marcador de posición para el gráfico circular */
+.chart-placeholder {
+    background-color: #eef2f5;
+    border-radius: 8px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 0.95rem;
+    min-height: 160px;
+}
+
+/* Alertas de la segunda tarjeta */
+.alert-badge {
+    color: #000000;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.alert-danger {
+    background-color: #e74c3c; /* Rojo suave */
+    color: #ffffff;
+}
+
+.alert-warning {
+    background-color: #f1c40f; /* Amarillo/Dorado */
+    color: #000000;
+}
+
+/* Lista de entregas de la tercera tarjeta */
+.deliveries-list {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.deliveries-list li {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+/* Enlace "Ver todas" */
+.view-all-link {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-top: auto; /* Lo empuja firmemente al fondo de la tarjeta */
+    transition: text-decoration 0.2s;
+}
+
+.view-all-link:hover {
+    text-decoration: underline;
+}

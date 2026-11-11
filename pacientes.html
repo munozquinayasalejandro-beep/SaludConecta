@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pacientes y Prescripciones — SaludConecta</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/public/style/pacientes.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="logo-section">
+            <form action="/login" method="POST">
+                <img src="/img/icono.png" alt="SALUDCONECTA" class="imagen-centrada" width="50" height="50">
+            </form>
+        </div>
+        <a href="/vista/medicamentos" class="nav-item">Inventario</a>
+        <a href="/vista/pacientes" class="nav-item active">Pacientes y Prescripciones</a>
+        <a href="/vista/entregas" class="nav-item">Entregas</a>
+        <a href="/vista/facturas" class="nav-item">Facturación</a>
+        <a href="#" title="Próximamente" class="nav-item">Reportes</a>
+    </nav>
+
+    <main class="content">
+        <div class="header-main">
+            <h2>Pacientes y Prescripciones</h2>
+            <i class="fas fa-home home-icon"></i>
+        </div>
+
+        <div class="grid-container">
+
+            <!-- ===================== BÚSQUEDA Y LISTADO DE PACIENTES ===================== -->
+            <section class="card full-width">
+                <h3>Buscar Paciente</h3>
+                <div class="search-bar">
+                    <input type="text" id="buscador-paciente" placeholder="Buscar por nombre o número de documento...">
+                    <button type="button" class="button button-enviarsolicitud" id="btn-buscar-paciente">Buscar</button>
+                    <button type="button" class="button button-cancelar" id="btn-limpiar-busqueda">Limpiar</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Documento</th>
+                                <th>Edad</th>
+                                <th>Teléfono</th>
+                                <th>EPS / Régimen</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pacTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ===================== PERFIL DEL PACIENTE SELECCIONADO ===================== -->
+            <section class="card full-width oculto" id="panel-perfil-paciente">
+                <h3>Perfil del Paciente</h3>
+                <div class="paciente-seleccionado-banner">
+                    Paciente seleccionado: <strong id="perfil-nombre-paciente">—</strong>
+                    <button type="button" class="btn-mini cancelar" id="btn-deseleccionar" style="float:right;">Cerrar</button>
+                </div>
+                <div class="profile-info" id="perfil-datos-container">
+                    <!-- Se llena dinámicamente con pacientes.js -->
+                </div>
+
+                <h3 style="margin-top:25px;">Historial de Prescripciones</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Medicamento</th>
+                                <th>Dosis</th>
+                                <th>Frecuencia</th>
+                                <th>Duración</th>
+                                <th>Diagnóstico</th>
+                                <th>Médico</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prescripcionesTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ===================== NUEVA PRESCRIPCIÓN (solo médico/admin) ===================== -->
+            <section class="card form-card oculto" id="seccion-nueva-prescripcion">
+                <h3>Nueva Prescripción</h3>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:12px;">
+                    Se registrará para el paciente seleccionado arriba.
+                </p>
+                <form id="prescripcionForm">
+                    <div class="form-group">
+                        <label for="rx-medicamento">Medicamento</label>
+                        <select id="rx-medicamento" class="custom-select" required>
+                            <option value="" disabled selected>Cargando inventario...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rx-diagnostico">Diagnóstico</label>
+                        <input type="text" id="rx-diagnostico" placeholder="Ej: Hipertensión arterial" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rx-cie10">Código CIE-10</label>
+                        <input type="text" id="rx-cie10" list="lista-cie10" placeholder="Ej: I10" required>
+                        <datalist id="lista-cie10">
+                            <option value="I10">Hipertensión esencial (primaria)</option>
+                            <option value="E11">Diabetes mellitus tipo 2</option>
+                            <option value="J00">Rinofaringitis aguda (resfriado común)</option>
+                            <option value="J02">Faringitis aguda</option>
+                            <option value="J03">Amigdalitis aguda</option>
+                            <option value="J45">Asma</option>
+                            <option value="A09">Diarrea y gastroenteritis de presunto origen infeccioso</option>
+                            <option value="R51">Cefalea</option>
+                            <option value="M54">Dorsalgia</option>
+                            <option value="N39">Infección de vías urinarias, sitio no especificado</option>
+                            <option value="L20">Dermatitis atópica</option>
+                            <option value="K29">Gastritis y duodenitis</option>
+                            <option value="B34">Infección viral, no especificada</option>
+                            <option value="F41">Trastornos de ansiedad</option>
+                            <option value="M79">Otros trastornos de tejidos blandos (dolor generalizado)</option>
+                        </datalist>
+                    </div>
+                    <div class="form-group">
+                        <label for="rx-dosis">Dosis</label>
+                        <input type="text" id="rx-dosis" placeholder="Ej: 500 mg" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rx-frecuencia">Frecuencia</label>
+                        <input type="text" id="rx-frecuencia" placeholder="Ej: Cada 8 horas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rx-duracion">Duración (días)</label>
+                        <input type="number" id="rx-duracion" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rx-unidades">Unidades a dispensar</label>
+                        <input type="number" id="rx-unidades" min="1" value="1" required>
+                    </div>
+                    <button type="submit" class="button button-enviarsolicitud">Registrar Prescripción</button>
+                    <p id="mensaje-prescripcion"></p>
+                </form>
+            </section>
+
+            <!-- ===================== REGISTRAR PACIENTE ===================== -->
+            <section class="card form-card">
+                <h3>Registrar Paciente</h3>
+                <form id="pacForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoDocumento">Tipo de documento</label>
+                        <select id="tipoDocumento" class="custom-select" required>
+                            <option value="CC">Cédula de Ciudadanía</option>
+                            <option value="TI">Tarjeta de Identidad</option>
+                            <option value="RC">Registro Civil</option>
+                            <option value="CE">Cédula de Extranjería</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="documento">Número de documento</label>
+                        <input type="text" id="documento" placeholder="Número de documento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edad">Edad</label>
+                        <input type="number" id="edad" min="0" max="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" placeholder="Número de contacto">
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" placeholder="Dirección de residencia">
+                    </div>
+                    <div class="form-group">
+                        <label for="epsRegimen">EPS / Régimen</label>
+                        <input type="text" id="epsRegimen" placeholder="Ej: Nueva EPS - Contributivo">
+                    </div>
+                    <div class="form-group">
+                        <label for="alergias">Alergias</label>
+                        <input type="text" id="alergias" placeholder="Ej: Penicilina (o 'Ninguna conocida')">
+                    </div>
+                    <div class="form-group">
+                        <label for="antecedentes">Antecedentes médicos</label>
+                        <input type="text" id="antecedentes" placeholder="Ej: Hipertensión, Diabetes tipo 2">
+                    </div>
+                    <button type="submit" class="button button-enviarsolicitud">Registrar Paciente</button>
+                    <p id="mensaje-paciente"></p>
+                </form>
+            </section>
+
+            <!-- ===================== SOLICITUD RÁPIDA DE MEDICAMENTO ===================== -->
+            <section class="card form-card">
+                <h3>Solicitud Rápida de Medicamento</h3>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:12px;">
+                    Para casos sin prescripción formal (entrega directa). Para tratamientos con diagnóstico,
+                    use "Nueva Prescripción" sobre un paciente seleccionado.
+                </p>
+                <form id="form-solicitud-medicamento">
+                    <div class="form-group">
+                        <label for="sol-paciente">Nombre del paciente</label>
+                        <input type="text" id="sol-paciente" placeholder="Nombre del paciente" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="medicamento-select">Medicamento</label>
+                        <select id="medicamento-select" class="custom-select" required>
+                            <option value="" disabled selected>Escoge un medicamento</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dosis-input">Dosis y Frecuencia</label>
+                        <input type="text" id="dosis-input" placeholder="Ej: 1 tableta cada 8 horas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regimen-select">Tipo de Régimen</label>
+                        <select id="regimen-select" class="custom-select" required>
+                            <option value="" disabled selected>Seleccionar régimen</option>
+                            <option value="subsidiado">Subsidiado</option>
+                            <option value="contributivo">Contributivo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="unidades-input">Total de Unidades</label>
+                        <input type="number" id="unidades-input" min="1" placeholder="Ej: 1" required>
+                    </div>
+                    <button type="submit" class="button button-enviarsolicitud">Enviar Solicitud</button>
+                    <button type="reset" class="button button-cancelar">Cancelar</button>
+                    <p id="mensaje-solicitud"></p>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ===================== MODAL EDITAR PACIENTE ===================== -->
+    <div class="modal fade" id="editPacienteModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="editPacienteForm">
+            <div class="modal-header">
+              <h5 class="modal-title">Editar Paciente</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="editId">
+              <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" id="editNombre" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Tipo de documento</label>
+                <select id="editTipoDocumento" class="form-select" required>
+                  <option value="CC">Cédula de Ciudadanía</option>
+                  <option value="TI">Tarjeta de Identidad</option>
+                  <option value="RC">Registro Civil</option>
+                  <option value="CE">Cédula de Extranjería</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Número de documento</label>
+                <input type="text" id="editDocumento" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Edad</label>
+                <input type="number" id="editEdad" class="form-control" min="0" max="120" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Teléfono</label>
+                <input type="tel" id="editTelefono" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Dirección</label>
+                <input type="text" id="editDireccion" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">EPS / Régimen</label>
+                <input type="text" id="editEpsRegimen" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Alergias</label>
+                <input type="text" id="editAlergias" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Antecedentes médicos</label>
+                <input type="text" id="editAntecedentes" class="form-control">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-success">Guardar Cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/authFetch.js"></script>
+    <script src="/public/pacientes.js"></script>
+</body>
+</html>

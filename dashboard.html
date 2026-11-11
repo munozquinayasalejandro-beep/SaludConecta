@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salud Conecta - Dashboard Principal</title>
+    <link rel="stylesheet" href="/public/style/dashboard.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="/public/authFetch.js"></script>
+    <script defer src="/public/dashboard.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <aside class="sidebar">
+            <h2 class="sidebar-title">Dashboard Principal</h2>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/vista/dashboard" class="active">Inicio</a></li>
+                    <li><a href="/vista/medicamentos">Inventario</a></li>
+                    <li><a href="/vista/pacientes">Pacientes</a></li>
+                    <li><a href="/vista/entregas">Entregas</a></li>
+                    <li><a href="/vista/facturas">Facturación</a></li>
+                    <li><a href="#" title="Próximamente">Reportes</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="cards-grid">
+                
+                <div class="card">
+                    <h3>Stock de Medicamentos</h3>
+                    <canvas id="stockChart"></canvas>
+                </div>
+
+                <div class="card">
+                    <h3>Entregas por Estado</h3>
+                    <canvas id="entregasChart"></canvas>
+                </div>
+
+                <div class="card">
+                    <h3>Pacientes Registrados</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr><th>ID</th><th>Nombre</th><th>Edad</th><th>Documento</th></tr>
+                            </thead>
+                            <tbody id="pacTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Inventario de Medicamentos</h3>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr><th>ID</th><th>Nombre</th><th>Lote</th><th>Cantidad</th><th>Vencimiento</th></tr>
+                            </thead>
+                            <tbody id="medTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+   
+</body>
+</html>

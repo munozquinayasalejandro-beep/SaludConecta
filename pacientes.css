@@ -1,0 +1,237 @@
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #ffffff;
+}
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- BARRA LATERAL (SIDEBAR) --- */
+nav {
+    width: 260px;
+    background-color: #b3d1ff; /* Azul claro de la imagen */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-right: 1px solid #ccc;
+}
+.logo-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-section p {
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+    color: #333;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #444;
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.nav-item.active {
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+main {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #be19a0; /* Línea  */
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.card {
+    background: #eeeeee; /* Gris claro de la imagen */
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.card h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Estilos Perfil */
+.profile-info .info-group {
+    margin-bottom: 18px;
+}
+
+.info-group label {
+    display: block;
+    font-weight: bold;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+.info-group p {
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Estilos Formulario */
+.form-card {
+    background: white; /* La tarjeta de la derecha es blanca */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+
+/* Estilos comunes para ambos botones */
+.button {
+    padding: 10px 20px;       /* Un poco más de espacio para que no se vean apretados */
+    border: none;             /* Quita el borde gris por defecto de HTML */
+    border-radius: 5px;       /* Redondea las esquinas para un look más moderno */
+    cursor: pointer;          /* Hace que aparezca la "manito" al pasar el mouse */
+    font-weight: bold;        /* Resalta el texto */
+}
+
+
+.button-enviarsolicitud {
+    background-color: #10ac84; 
+    color: white;
+}
+
+.button-cancelar {
+    background-color: #ee5253; 
+    color: white;
+}
+
+/* --- Elementos nuevos: búsqueda, tablas, badges --- */
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+table.data-table th, table.data-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+table.data-table th {
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+table.data-table tr:hover {
+    background-color: #f9fbff;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    color: white;
+}
+
+.badge-pendiente { background-color: #f0ad4e; }
+.badge-dispensada { background-color: #10ac84; }
+.badge-cancelada { background-color: #ee5253; }
+
+.btn-mini {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    margin-right: 4px;
+}
+
+.btn-mini.ver { background-color: #3498db; }
+.btn-mini.editar { background-color: #f0ad4e; }
+.btn-mini.eliminar { background-color: #ee5253; }
+.btn-mini.dispensar { background-color: #10ac84; }
+.btn-mini.cancelar { background-color: #999; }
+
+.paciente-seleccionado-banner {
+    background-color: #eaf6ff;
+    border-left: 4px solid #3498db;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.92rem;
+}
+
+.oculto {
+    display: none !important;
+}

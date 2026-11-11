@@ -1,0 +1,179 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #ffffff;
+}
+
+/* BARRA LATERAL */
+nav {
+    width: 260px;
+    background-color: #b3d1ff; /* Azul claro de la imagen */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-right: 1px solid #ccc;
+}
+
+.logo-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-section p {
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+    color: #333;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #444;
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.nav-item.active {
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+/* CONTENIDO PRINCIPAL */
+main {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f39c12; /* Línea naranja */
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.header-main h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* CONTENEDOR DE LA TABLA */
+.container-table {
+    border: 2px solid #3498db;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Buscador */
+.search-box {
+    position: relative;
+    width: 350px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 45px 10px 20px;
+    border-radius: 15px;
+    border: 2px solid #333;
+    font-size: 16px;
+}
+
+.search-box i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+/* Botones Superiores */
+.btn {
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.btn-add { background-color: #2b65ec; }
+.btn-filter { background-color: #f39c12; }
+
+/* --- TABLA --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #b3d1ff;
+    color: #333;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #333;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    color: #333;
+}
+
+/* Botones de Acción */
+.btn-edit {
+    background-color: #27ae60;
+    padding: 5px 12px;
+    margin-right: 5px;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+    padding: 5px 12px;
+}
+/* Contenedor del Mapa */
+.map-container {
+    width: 100%;
+    height: 300px;
+    background-color: #e5e3df;
+    border: 2px solid #3498db;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    position: relative;
+}
+
+.map-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Pines decorativos sobre el mapa (simulación) */
+.pin-1 { position: absolute; top: 20%; left: 40%; color: #333; }
+.pin-2 { position: absolute; bottom: 30%; right: 10%; color: #333; }
+

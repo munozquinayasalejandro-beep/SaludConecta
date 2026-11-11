@@ -1,0 +1,102 @@
+/* Paleta de Colores - Salud Conecta */
+    :root {
+        --bg-sidebar: #BFDBFE !important;       /* Azul pastel */
+        --active-menu: #DBEAFE !important;      /* Activo */
+        --btn-blue: #2563EB !important;         /* Azul rey */
+        --btn-orange: #F59E0B !important;       /* Naranja */
+        --btn-green: #10B981 !important;        /* Verde */
+        --btn-red: #EF4444 !important;          /* Rojo */
+        --table-header: #BFDBFE !important;     /* Encabezado */
+    }
+
+    /* Contenedor general */
+    html, body, .layout-container {
+        height: 100vh !important;
+        margin: 0 !important;
+        background-color: #FFFFFF !important;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    /* Barra Lateral Izquierda */
+    .sidebar {
+        width: 260px !important;
+        background-color: #BFDBFE !important; /* Fuerza el azul pastel */
+        min-height: 100vh !important;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.05) !important;
+    }
+
+    .sidebar .nav-link.active {
+        background-color: #DBEAFE !important;
+        color: #2563EB !important;
+        font-weight: bold !important;
+    }
+
+    /* Línea decorativa del Título */
+    .title-divider {
+        border-top: 3px solid #F59E0B !important; /* Fuerza el naranja */
+        opacity: 1 !important;
+        margin-top: 5px !important;
+        margin-bottom: 25px !important;
+    }
+
+    /* Contenedor de la Tabla */
+    .table-container {
+        border: 2px solid #2563EB !important; /* Borde Azul Rey */
+        border-radius: 12px !important;
+        background-color: #FFFFFF !important;
+    }
+
+    /* Buscador */
+    .search-input {
+        border: 2px solid #000000 !important;
+        border-radius: 30px !important;
+        padding: 8px 16px !important;
+        max-width: 400px !important;
+    }
+
+    /* Encabezado de la Tabla */
+    .custom-table thead th {
+        background-color: #BFDBFE !important; /* Fondo azul en la cabecera */
+        color: #1E3A8A !important;
+        font-weight: bold !important;
+        padding: 12px !important;
+        border: none !important;
+    }
+
+    .custom-table tbody td {
+        padding: 14px 12px !important;
+        border-bottom: 1px solid #E5E7EB !important;
+        background-color: #FFFFFF !important;
+    }
+
+    /* BOTONES CON COLORES DE TU DISEÑO */
+    .btn-custom-blue {
+        background-color: #2563EB !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        font-weight: bold !important;
+    }
+    .btn-custom-blue:hover { background-color: #1D4ED8 !important; }
+
+    .btn-custom-orange {
+        background-color: #F59E0B !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        font-weight: bold !important;
+    }
+    .btn-custom-orange:hover { background-color: #D97706 !important; }
+
+    .btn-custom-green {
+        background-color: #10B981 !important;
+        color: #FFFFFF !important;
+        border: none !important;
+    }
+    .btn-custom-green:hover { background-color: #059669 !important; }
+
+    .btn-custom-red {
+        background-color: #EF4444 !important;
+        color: #FFFFFF !important;
+        border: none !important;
+    }
+    .btn-custom-red:hover { background-color: #DC2626 !important; }
+  
